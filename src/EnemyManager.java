@@ -1,11 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EnemyManager extends JFrame {
     // Define interface components / 定义界面组件
     // Define text fields for input / 定义文本字段用于输入
     private JTextField nameField; // Field for inputting the name / 用于输入名称的字段
+    private JComboBox<String> imageSelector; // Image selector component / 图片选择器组件
     private JTextField speedField; // Field for inputting the speed / 用于输入速度的字段
+
 
     // Define buttons for various actions / 定义按钮进行各种操作
     private JButton addButton; // Button to add a new entry / 用于添加新条目的按钮
@@ -40,8 +44,19 @@ public class EnemyManager extends JFrame {
         nameField = new JTextField(); // Name field / 名称字段
         speedField = new JTextField(); // Speed field / 速度字段
 
+        // Image selector / 图片选择器
+        List<String> images = new ArrayList<>(); // Create a list to store image file names / 创建存储图片文件名的列表
+        images.add("fireball.png"); // Replace with actual image file name / 替换为实际的图片文件名
+        images.add("image2.png"); // Replace with actual image file name / 替换为实际的图片文件名
+        //Add more images... / 添加更多图片……
+
+        // Initialize image selector and populate data / 初始化图片选择器并填充数据
+        imageSelector = new JComboBox<>(images.toArray(new String[0]));
+
         formPanel.add(new JLabel("Name:")); // Add label / 添加标签
         formPanel.add(nameField); // Add name input field / 添加名称输入框
+        formPanel.add(new JLabel("Image:")); // Add image label to form / 添加图片标签到表单
+        formPanel.add(imageSelector); // Add image selector to form / 将图片选择器添加到表单
         formPanel.add(new JLabel("Speed:")); // Add label / 添加标签
         formPanel.add(speedField); // Add speed input field / 添加速度输入框
 
