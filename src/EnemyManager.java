@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class EnemyManager extends JFrame {
     // Define interface components / 定义界面组件
@@ -21,13 +25,13 @@ public class EnemyManager extends JFrame {
 
     // Define a list to display enemy types / 定义列表显示敌人类型
     private JList<EnemyType> enemyList; // List for displaying types of enemies / 用于展示敌人类型的列表
-
+    private DefaultListModel<EnemyType> enemyListModel; //new
 
     public EnemyManager() {
         setTitle("Enemy Type Manager"); // Set window title / 设置窗口标题
-        setSize(400, 300); // Set window size / 设置窗口大小
+        setSize(400, 647); // Set window size / 设置窗口大小
         setLayout(new BorderLayout()); // Set layout manager / 设置布局管理器
-
+        enemyListModel = new DefaultListModel<>();//new
         // Create and add form / 创建并添加表单
         createForm();
 
@@ -39,6 +43,9 @@ public class EnemyManager extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // Set default close operation / 设置默认关闭操作
         setVisible(true); // Set window visible / 设置窗口可见
+
+        loadEnemyTypesFromCSV();
+
 
         // Additional action listeners for buttons / 为按钮添加额外的动作监听器
         addButton.addActionListener(new ActionListener() {
@@ -55,24 +62,6 @@ public class EnemyManager extends JFrame {
             }
         });
 
-    }
-
-    // Method to add a new enemy type / 添加新敌人类型的方法
-    private void addEnemyType() {
-        String name = nameField.getText(); // Get name from text field / 从文本框获取名称
-        String image = (String) imageSelector.getSelectedItem(); // Get selected image / 获取选中的图片
-        int speed = Integer.parseInt(speedField.getText()); // Get speed from text field / 从文本框获取速度
-
-        EnemyType newEnemy = new EnemyType(name, image, speed); // Create new enemy type / 创建新的敌人类型
-        // Add new enemy to the list model / 将新敌人添加到列表模型
-        // Need to create a suitable list model to store enemy types / 还需要创建一个合适的列表模型来存储敌人类型
-        // enemyListModel.addElement(newEnemy);
-    }
-
-    // Method to save enemy types data to a CSV file / 将敌人类型数据保存到CSV文件的方法
-    private void saveEnemyTypesToCSV() {
-        // Implement logic to save enemy types data to a CSV file / 实现将敌人类型数据保存到CSV文件的逻辑
-        // This requires file writing operations / 这里需要文件写入操作
     }
 
     private void createForm() {
@@ -115,10 +104,60 @@ public class EnemyManager extends JFrame {
     }
 
     private void createEnemyList() {
-        enemyList = new JList<>(); // Create enemy type list / 创建敌人种类列表
+        enemyList = new JList<>(enemyListModel); // Create enemy type list / 创建敌人种类列表
         add(new JScrollPane(enemyList), BorderLayout.CENTER); // Add scrollable list to window / 添加带滚动条的列表到窗口
     }
 
+
+    private void addEnemyType() {
+        String name = nameField.getText();
+        String image = (String) imageSelector.getSelectedItem();
+        int speed;
+        try {
+            speed = Integer.parseInt(speedField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Speed must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        EnemyType newEnemy = new EnemyType(name, image, speed);
+        enemyListModel.addElement(newEnemy); // 将新敌人添加到列表模型
+    }
+
+    private void loadEnemyTypesFromCSV() {
+        // Method to load enemy types from a CSV file / 从CSV文件加载敌人类型的方法
+        String csvFile = "data/enemies.csv"; // CSV file path / CSV文件路径
+        String line; // Variable to store each line from the file / 用于存储文件中每一行的变量
+        String csvSplitBy = ","; // Delimiter used in the CSV file / CSV文件中使用的分隔符
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            while ((line = br.readLine()) != null) {
+                String[] enemyData = line.split(csvSplitBy); // Split line into parts / 将行分割成多个部分
+                String name = enemyData[0]; // Extract name / 提取名称
+                String image = enemyData[1]; // Extract image / 提取图片
+                int speed = Integer.parseInt(enemyData[2]); // Extract and parse speed / 提取并解析速度
+                EnemyType enemy = new EnemyType(name, image, speed); // Create new EnemyType / 创建新的EnemyType
+                enemyListModel.addElement(enemy); // Add enemy to the list model / 将敌人添加到列表模型中
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveEnemyTypesToCSV() {
+        // Method to save enemy types to a CSV file / 将敌人类型保存到CSV文件的方法
+        String csvFile = "data/enemies.csv"; // CSV file path / CSV文件路径
+
+        try (FileWriter writer = new FileWriter(csvFile)) {
+            for (int i = 0; i < enemyListModel.getSize(); i++) {
+                EnemyType enemy = enemyListModel.getElementAt(i); // Get each enemy type / 获取每种敌人类型
+                String line = enemy.getName() + "," + enemy.getImage() + "," + enemy.getSpeed(); // Format data as CSV / 将数据格式化为CSV
+                writer.write(line + "\n"); // Write line to file / 将行写入文件
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         new EnemyManager(); // Create and display enemy type manager interface / 创建并显示敌人种类管理界面
     }
