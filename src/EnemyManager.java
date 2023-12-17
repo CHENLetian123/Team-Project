@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class EnemyManager extends JFrame {
     // Define interface components / 定义界面组件
@@ -37,6 +39,40 @@ public class EnemyManager extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // Set default close operation / 设置默认关闭操作
         setVisible(true); // Set window visible / 设置窗口可见
+
+        // Additional action listeners for buttons / 为按钮添加额外的动作监听器
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addEnemyType(); // Call method to add a new enemy type / 调用方法以添加新的敌人类型
+            }
+        });
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveEnemyTypesToCSV(); // Call method to save enemy types to CSV / 调用方法将敌人类型保存到CSV文件
+            }
+        });
+
+    }
+
+    // Method to add a new enemy type / 添加新敌人类型的方法
+    private void addEnemyType() {
+        String name = nameField.getText(); // Get name from text field / 从文本框获取名称
+        String image = (String) imageSelector.getSelectedItem(); // Get selected image / 获取选中的图片
+        int speed = Integer.parseInt(speedField.getText()); // Get speed from text field / 从文本框获取速度
+
+        EnemyType newEnemy = new EnemyType(name, image, speed); // Create new enemy type / 创建新的敌人类型
+        // Add new enemy to the list model / 将新敌人添加到列表模型
+        // Need to create a suitable list model to store enemy types / 还需要创建一个合适的列表模型来存储敌人类型
+        // enemyListModel.addElement(newEnemy);
+    }
+
+    // Method to save enemy types data to a CSV file / 将敌人类型数据保存到CSV文件的方法
+    private void saveEnemyTypesToCSV() {
+        // Implement logic to save enemy types data to a CSV file / 实现将敌人类型数据保存到CSV文件的逻辑
+        // This requires file writing operations / 这里需要文件写入操作
     }
 
     private void createForm() {
