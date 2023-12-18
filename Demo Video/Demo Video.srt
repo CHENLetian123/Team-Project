@@ -1,0 +1,64 @@
+﻿1
+00:00:00,000 --> 00:00:11,560
+The project name is "Saceress Siege". The project background is in a kingdom full of magical and dangerous things.
+
+2
+00:00:11,560 --> 00:00:19,360
+The players need to defend the kingdom as a magical role to avoid the barrages unleashed by the evil wizard.
+
+3
+00:00:19,360 --> 00:00:25,560
+The CSV files with "Comma" in their names will not be incorrectly identified when adding enemies. 
+
+4
+00:00:25,560 --> 00:00:33,800
+Entering enemy speed will prompt an error if it is not a number or an integer.
+
+5
+00:00:33,800 --> 00:00:41,360
+"Add" and "Edit" are added temporarily and are not written to the CSV file.
+
+6
+00:00:41,360 --> 00:00:50,040
+Click "Save" to write the file to the CSV file, then "Delete" is delete.
+
+7
+00:00:50,040 --> 00:00:58,680
+This save is the standard for outstanding data persistence. Finish the program by clicking "Save",
+
+8
+00:00:58,680 --> 00:01:06,720
+open enemies.csv, show the enemies you just added called "Comma" and "Double Quotes",
+
+9
+00:01:06,720 --> 00:01:16,640
+then start again and see that their names are displayed correctly.
+
+10
+00:01:16,640 --> 00:01:25,200
+For enemy names, the speed map implement the CRUD function with a graphical interface, then click "Start",
+
+11
+00:01:25,200 --> 00:01:31,040
+enter "Double Quotes" and "Comma" in the name to prove the robustness of the code,
+
+12
+00:01:31,040 --> 00:01:39,040
+then enter decimals and letters in the velocity, and then a window will pop up.
+
+13
+00:01:39,040 --> 00:01:48,280
+After a few clicks on the drop-down box of the picture, selecting this enemy is selecting the corresponding tile.
+
+14
+00:01:48,280 --> 00:01:55,760
+Before clicking to start the game, enemies will randomly send new ones from the list of existing enemies.
+
+15
+00:01:55,760 --> 00:02:10,200
+Then what we have to do is manipulate the player to avoid the fireball, waterball, and magic ball. If the ball crosses the bottom line, it scores. 
+
+16
+00:02:10,200 --> 00:02:20,480
+Every time you increase the difficulty level, you increase the speed of the enemy, and then this is our pause, continue, and restart function.
+

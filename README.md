@@ -71,3 +71,8 @@ To embark on your Sorcerers Siege adventure, follow these steps:
 ## References
 
 - **OpenAI's ChatGPT**: Utilized for providing programming guidance, and generating content for this README.md File.
+
+
+## Special Thanks
+
+A heartfelt thank you to Dave Drohan. It is your invaluable understanding and support that made all of this possible. Your guidance and expertise have been instrumental to us. We are immensely grateful for your contributions and for being a pivotal part of this journey.
