@@ -28,6 +28,15 @@ public class EnemyManager extends JFrame {
     private JList<EnemyType> enemyList; // List for displaying types of enemies / 用于展示敌人类型的列表
     private DefaultListModel<EnemyType> enemyListModel; //new
 
+    public List<EnemyType> getEnemyTypes() {
+        // Get a list of all enemy types / 获取所有敌人类型的列表
+        List<EnemyType> enemyTypes = new ArrayList<>();
+        for (int i = 0; i < enemyListModel.getSize(); i++) {
+            enemyTypes.add(enemyListModel.getElementAt(i));
+        }
+        return enemyTypes;
+    }
+
     public EnemyManager() {
         setTitle("Enemy Type Manager"); // Set window title / 设置窗口标题
         setSize(400, 647); // Set window size / 设置窗口大小
@@ -102,7 +111,8 @@ public class EnemyManager extends JFrame {
         // Image selector / 图片选择器
         List<String> images = new ArrayList<>(); // Create a list to store image file names / 创建存储图片文件名的列表
         images.add("fireball.png"); // Replace with actual image file name / 替换为实际的图片文件名
-        images.add("image2.png"); // Replace with actual image file name / 替换为实际的图片文件名
+        images.add("waterball.png"); //No "resources/"!!!!!  just xxx.png
+        images.add("magicball.png");
         //Add more images... / 添加更多图片……
 
         // Initialize image selector and populate data / 初始化图片选择器并填充数据
@@ -148,12 +158,10 @@ public class EnemyManager extends JFrame {
 
     private void startGame() {
         System.out.println("Starting game..."); // Output starting game message / 输出开始游戏消息
-
-        this.dispose();// Close the enemy manager window / 关闭敌人管理窗口
-
+        List<EnemyType> enemyTypes = getEnemyTypes();
         // Launch the game window / 启动游戏窗口
-        new GameWindow(); // Assume GameWindow is your game window class / 假设 GameWindow 是您的游戏窗口类
-
+        new GameWindow(enemyTypes); // Assume GameWindow is your game window class / 假设 GameWindow 是您的游戏窗口类
+        this.dispose();// Close the enemy manager window / 关闭敌人管理窗口
     }
 
     private void createEnemyList() {

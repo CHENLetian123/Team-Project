@@ -3,11 +3,23 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
+import java.util.List;
+import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class GameWindow extends JFrame {
+
+    private List<EnemyType> enemyTypes;
     private GamePanel gamePanel; // 游戏面板
     private boolean isGameStarted = false; // 游戏是否已开始的标志
 
-    public GameWindow() {
+    public GameWindow(List<EnemyType> enemyTypes) {
+        // Constructor: Initialize the game window with enemy types / 构造函数：用敌人类型初始化游戏窗口
+        this.enemyTypes = enemyTypes;
+
         System.out.println("GameWindow is being initialized..."); // Output initialization message / 输出初始化消息
         // 设置窗口标题
         setTitle("Sorcerers Siege");
@@ -19,7 +31,7 @@ public class GameWindow extends JFrame {
         setSize(800, 600);
 
         // 初始化游戏面板并添加到窗口中
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(enemyTypes);
         add(gamePanel);
 
         // 显示开始菜单
@@ -27,11 +39,30 @@ public class GameWindow extends JFrame {
 
         // 设置窗口居中显示
         setLocationRelativeTo(null);
+
+        initializeGame(); // Initialize the game / 初始化游戏
     }
 
+    private void initializeGame() {
+        // Initialize the game panel with enemy types / 使用敌人类型初始化游戏面板
+
+        /*System.out.println("GameWindow is being initialized...");
+
+        setTitle("Sorcerers Siege");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600);*/
+
+        gamePanel = new GamePanel(enemyTypes); // 将敌人种类数据传递给游戏面板
+        add(gamePanel);
+
+        /*showStartMenu();
+        setLocationRelativeTo(null);*/
+    }
+
+
     private void showStartMenu() {
-        // 创建开始按钮
-        JButton startButton = new JButton("开始游戏");
+        // Create start, pause, resume, and restart buttons / 创建开始、暂停、继续和重启按钮
+        JButton startButton = new JButton("Start Game 开始游戏");
         startButton.addActionListener(e -> {
             isGameStarted = true;
             startButton.setVisible(false); // 隐藏按钮
@@ -39,13 +70,13 @@ public class GameWindow extends JFrame {
         });
 
         // 创建暂停和重启按钮
-        JButton pauseButton = new JButton("暂停");
+        JButton pauseButton = new JButton("Pause Game 暂停");
         pauseButton.addActionListener(e -> gamePanel.pauseGame());
 
-        JButton resumeButton = new JButton("继续");
+        JButton resumeButton = new JButton("Resume Game 继续");
         resumeButton.addActionListener(e -> gamePanel.resumeGame());
 
-        JButton restartButton = new JButton("重新开始");
+        JButton restartButton = new JButton("Restart Game 重新开始");
         restartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,15 +93,36 @@ public class GameWindow extends JFrame {
         buttonPanel.add(restartButton);
         this.add(buttonPanel, BorderLayout.NORTH);
 
-        setVisible(true); // very very very important stuff
-
+        setVisible(true); // very very very important stuff!!!
+        // Make the window visible / 使窗口可见
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            GameWindow window = new GameWindow();
-            window.setVisible(true); //便于直接运行
-
+            try {
+                List<EnemyType> enemies = readEnemiesFromFile("data/enemies.csv");
+                GameWindow window = new GameWindow(enemies);
+                window.setVisible(true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
+    }
+
+    private static List<EnemyType> readEnemiesFromFile(String filePath) throws IOException {
+        // Read enemy types from a file / 从文件中读取敌人类型
+        List<EnemyType> enemies = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            br.readLine(); // 跳过标题行
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                String name = values[0];
+                String image = values[1];
+                int speed = Integer.parseInt(values[2]);
+                enemies.add(new EnemyType(name, image, speed));
+            }
+        }
+        return enemies;
     }
 }
