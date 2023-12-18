@@ -73,6 +73,22 @@ public class EnemyManager extends JFrame {
             }
         });
 
+        editButton.addActionListener(new ActionListener() {
+            // Get the index of the selected item in the list / 获取列表中选中项的索引
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIdx = enemyList.getSelectedIndex();
+                if (selectedIdx != -1) { // Check if an item is selected / 检查是否有选中的项
+                    EnemyType selectedEnemy = enemyListModel.get(selectedIdx); // Get the selected enemy type / 获取选中的敌人类型
+                    // Set fields to the values of the selected enemy / 将字段设置为选中敌人的值
+                    nameField.setText(selectedEnemy.getName());
+                    imageSelector.setSelectedItem(selectedEnemy.getImage());
+                    speedField.setText(String.valueOf(selectedEnemy.getSpeed()));
+                    enemyListModel.remove(selectedIdx); // Temporarily remove the enemy for updating / 暂时移除敌人以便更新
+                }
+            }
+        });
+
 
     }
 
