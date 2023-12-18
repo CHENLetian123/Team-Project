@@ -153,23 +153,39 @@ public class EnemyManager extends JFrame {
     }
 
     private void loadEnemyTypesFromCSV() {
-        // Method to load enemy types from a CSV file / 从CSV文件加载敌人类型的方法
-        String csvFile = "data/enemies.csv"; // CSV file path / CSV文件路径
-        String line; // Variable to store each line from the file / 用于存储文件中每一行的变量
-        String csvSplitBy = ","; // Delimiter used in the CSV file / CSV文件中使用的分隔符
+        String csvFile = "data/enemies.csv"; // Path to the CSV file / CSV文件路径
+        String line;
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
-                String[] enemyData = line.split(csvSplitBy); // Split line into parts / 将行分割成多个部分
-                String name = enemyData[0]; // Extract name / 提取名称
-                String image = enemyData[1]; // Extract image / 提取图片
-                int speed = Integer.parseInt(enemyData[2]); // Extract and parse speed / 提取并解析速度
-                EnemyType enemy = new EnemyType(name, image, speed); // Create new EnemyType / 创建新的EnemyType
-                enemyListModel.addElement(enemy); // Add enemy to the list model / 将敌人添加到列表模型中
+                // Update the split regex to handle complex CSV structures / 更新分割字符串的正则表达式以处理复杂的CSV结构
+                String[] enemyData = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                if (enemyData.length >= 3) {
+                    // Handle fields enclosed in quotes / 处理引号封装的字段
+                    String name = unformatCsvField(enemyData[0]); // Extract name / 提取名称
+                    String image = unformatCsvField(enemyData[1]); // Extract image / 提取图片
+                    int speed = Integer.parseInt(unformatCsvField(enemyData[2])); // Extract and parse speed / 提取并解析速度
+
+                    EnemyType enemy = new EnemyType(name, image, speed); // Create new EnemyType / 创建新的EnemyType
+                    enemyListModel.addElement(enemy); // Add enemy to the list model / 将敌人添加到列表模型中
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String formatCsvField(String data) {
+        // Format the field for CSV output, handling quotes / 格式化CSV输出的字段，处理双引号
+        return "\"" + data.replace("\"", "\"\"") + "\"";
+    }
+
+    private String unformatCsvField(String data) {
+        // Unformat the field from CSV input, handling quotes / 从CSV输入中反格式化字段，处理双引号
+        if (data.startsWith("\"") && data.endsWith("\"")) {
+            data = data.substring(1, data.length() - 1); // Remove the leading and trailing quotes / 移除首尾双引号
+        }
+        return data.replace("\"\"", "\""); // Convert double quotes to single quotes / 将两个双引号转换为一个双引号
     }
 
     private void saveEnemyTypesToCSV() {
@@ -179,8 +195,11 @@ public class EnemyManager extends JFrame {
         try (FileWriter writer = new FileWriter(csvFile)) {
             for (int i = 0; i < enemyListModel.getSize(); i++) {
                 EnemyType enemy = enemyListModel.getElementAt(i); // Get each enemy type / 获取每种敌人类型
-                String line = enemy.getName() + "," + enemy.getImage() + "," + enemy.getSpeed(); // Format data as CSV / 将数据格式化为CSV
-                writer.write(line + "\n"); // Write line to file / 将行写入文件
+                // Format each field and concatenate for CSV / 格式化每个字段并连接成CSV
+                String line = formatCsvField(enemy.getName()) + ","
+                        + formatCsvField(enemy.getImage()) + ","
+                        + enemy.getSpeed();
+                writer.write(line + "\n"); // Write the formatted line to the file / 将格式化的行写入文件
             }
         } catch (IOException e) {
             e.printStackTrace();
