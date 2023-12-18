@@ -62,6 +62,18 @@ public class EnemyManager extends JFrame {
             }
         });
 
+        deleteButton.addActionListener(new ActionListener() {
+            // Get the index of the selected item in the list / 获取列表中选中项的索引
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIdx = enemyList.getSelectedIndex();
+                if (selectedIdx != -1) { // Check if an item is selected / 检查是否有选中的项
+                    enemyListModel.remove(selectedIdx); // Remove the selected item from the model / 从模型中移除选中的项
+                }
+            }
+        });
+
+
     }
 
     private void createForm() {
@@ -121,7 +133,7 @@ public class EnemyManager extends JFrame {
         }
 
         EnemyType newEnemy = new EnemyType(name, image, speed);
-        enemyListModel.addElement(newEnemy); // 将新敌人添加到列表模型
+        enemyListModel.addElement(newEnemy); // Add new enemy to the list model / 将新敌人添加到列表模型中
     }
 
     private void loadEnemyTypesFromCSV() {
