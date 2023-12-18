@@ -113,6 +113,8 @@ public class EnemyManager extends JFrame {
         images.add("fireball.png"); // Replace with actual image file name / 替换为实际的图片文件名
         images.add("waterball.png"); //No "resources/"!!!!!  just xxx.png
         images.add("magicball.png");
+        images.add("iceball.png");
+        images.add("snowball.png"); // More more more !!!
         //Add more images... / 添加更多图片……
 
         // Initialize image selector and populate data / 初始化图片选择器并填充数据
