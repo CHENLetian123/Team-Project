@@ -8,7 +8,7 @@ public class Enemy {
     //private Image fireballImage;
     private Image enemyImage;
     private int x, y, speed;
-    private int size = 20; // 敌人的大小
+    private int size = 50; // 敌人的大小
     private Random random = new Random();
 
     // 修改后的构造函数

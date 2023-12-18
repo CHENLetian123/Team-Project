@@ -28,7 +28,7 @@ public class GameWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // 设置窗口的大小
-        setSize(800, 600);
+        setSize(1024, 1024);
 
         // 初始化游戏面板并添加到窗口中
         gamePanel = new GamePanel(enemyTypes);

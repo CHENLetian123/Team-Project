@@ -27,7 +27,7 @@ public class GamePanel extends JPanel {
 
     public GamePanel(List<EnemyType> enemyTypes) {
         // 初始化玩家和敌人列表
-        player = new Player(100, 100);
+        player = new Player(487, 512);
         enemies = new ArrayList<>();
 
         // 定时生成敌人
@@ -84,7 +84,7 @@ public class GamePanel extends JPanel {
         });
 
         // 初始化游戏更新定时器
-        gameUpdateTimer = new Timer(50, e -> updateGame());
+        gameUpdateTimer = new Timer(25, e -> updateGame());
     }
 
 
@@ -103,7 +103,7 @@ public class GamePanel extends JPanel {
     }
 
     public void startGame() {
-        player = new Player(100, 100); // 重置玩家位置
+        player = new Player(487, 512); // 重置玩家位置
         enemies.clear(); // 清除所有敌人
         score = 0; // 重置分数
         gameOver = false; // 重置游戏结束标志
@@ -127,7 +127,7 @@ public class GamePanel extends JPanel {
 
     public void restartGame() {
         // 重置游戏状态
-        player = new Player(100, 100); // 重置玩家位置
+        player = new Player(487, 512); // 重置玩家位置
         enemies.clear(); // 清除所有敌人
         score = 0; // 重置分数
         gameOver = false; // 重置游戏结束标志
@@ -164,9 +164,9 @@ public class GamePanel extends JPanel {
     }
 
     private void checkCollisions() {
-        Rectangle playerBounds = new Rectangle(player.getX(), player.getY(), 20, 20);
+        Rectangle playerBounds = new Rectangle(player.getX(), player.getY(), 100, 100);
         for (Enemy enemy : enemies) {
-            Rectangle enemyBounds = new Rectangle(enemy.getX(), enemy.getY(), 20, 20);
+            Rectangle enemyBounds = new Rectangle(enemy.getX(), enemy.getY(), 50, 50);
             if (playerBounds.intersects(enemyBounds)) {
                 gameOver(); // 处理游戏结束
             }
@@ -182,7 +182,7 @@ public class GamePanel extends JPanel {
     // 更新分数的方法
     private void updateScore() {
         for (Enemy enemy : enemies) {
-            if (enemy.getY() > 600) { // 当敌人离开屏幕底部
+            if (enemy.getY() > 1024) { // 当敌人离开屏幕底部
                 score++; // 增加分数
                 enemy.resetPosition(); // 重置敌人位置
                 if (score >= nextDifficultyThreshold) {
@@ -204,7 +204,7 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
 
         if (gameOver) {
-            g.drawString("Game Over! Your score： " + score, 350, 300); // Display score when the game is over / 游戏结束时显示得分
+            g.drawString("Game Over! Your score： " + score, 437, 512); // Display score when the game is over / 游戏结束时显示得分
             return;
         }
         // Display the difficulty level / 显示难度等级
