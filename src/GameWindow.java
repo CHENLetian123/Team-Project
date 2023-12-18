@@ -8,6 +8,7 @@ public class GameWindow extends JFrame {
     private boolean isGameStarted = false; // 游戏是否已开始的标志
 
     public GameWindow() {
+        System.out.println("GameWindow is being initialized..."); // Output initialization message / 输出初始化消息
         // 设置窗口标题
         setTitle("Sorcerers Siege");
 
@@ -60,12 +61,16 @@ public class GameWindow extends JFrame {
         buttonPanel.add(resumeButton);
         buttonPanel.add(restartButton);
         this.add(buttonPanel, BorderLayout.NORTH);
+
+        setVisible(true); // very very very important stuff
+
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             GameWindow window = new GameWindow();
-            window.setVisible(true);
+            window.setVisible(true); //便于直接运行
+
         });
     }
 }

@@ -15,6 +15,7 @@ public class EnemyManager extends JFrame {
     private JTextField nameField; // Field for inputting the name / 用于输入名称的字段
     private JComboBox<String> imageSelector; // Image selector component / 图片选择器组件
     private JTextField speedField; // Field for inputting the speed / 用于输入速度的字段
+    private JButton startGameButton; // Declaration of the start game button / 开始游戏按钮的声明
 
 
     // Define buttons for various actions / 定义按钮进行各种操作
@@ -31,6 +32,7 @@ public class EnemyManager extends JFrame {
         setTitle("Enemy Type Manager"); // Set window title / 设置窗口标题
         setSize(400, 647); // Set window size / 设置窗口大小
         setLayout(new BorderLayout()); // Set layout manager / 设置布局管理器
+        setLocationRelativeTo(null); // Set the window to be displayed in the center / 设置窗口居中显示
         enemyListModel = new DefaultListModel<>();//new
         // Create and add form / 创建并添加表单
         createForm();
@@ -129,6 +131,29 @@ public class EnemyManager extends JFrame {
         buttonPanel.add(saveButton); // Add "Save" button to panel / 将保存按钮添加到面板
 
         add(buttonPanel, BorderLayout.SOUTH); // Add button panel to window / 将按钮面板添加到窗口
+
+        startGameButton = new JButton("Start Game"); // Initialize the start game button / 初始化开始游戏按钮
+        buttonPanel.add(startGameButton); // Add the button to the panel / 将按钮添加到面板
+
+        // Add action listener to the button / 添加按钮的动作监听器
+        startGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startGame(); // Call the start game method / 调用开始游戏方法
+            }
+        });
+
+        add(buttonPanel, BorderLayout.SOUTH); // Add the button panel to the window / 将按钮面板添加到窗口
+    }
+
+    private void startGame() {
+        System.out.println("Starting game..."); // Output starting game message / 输出开始游戏消息
+
+        this.dispose();// Close the enemy manager window / 关闭敌人管理窗口
+
+        // Launch the game window / 启动游戏窗口
+        new GameWindow(); // Assume GameWindow is your game window class / 假设 GameWindow 是您的游戏窗口类
+
     }
 
     private void createEnemyList() {
