@@ -1,64 +1,95 @@
 ﻿1
-00:00:00,000 --> 00:00:11,560
-The project name is "Saceress Siege". The project background is in a kingdom full of magical and dangerous things.
+00:00:00,000 --> 00:00:16,000
+The project name is "Sorcerer's Siege" and the project background is "In a kingdom full of magical and dangerous things, the players need to defend the kingdom as a magical role to avoid the barrages unleashed by the evil wizard."
 
 2
-00:00:11,560 --> 00:00:19,360
-The players need to defend the kingdom as a magical role to avoid the barrages unleashed by the evil wizard.
+00:00:16,000 --> 00:00:31,000
+And then this are the dangerous things such as fireball, iceball, magical ball, water ball, and snowball. And this is the player.
 
 3
-00:00:19,360 --> 00:00:25,560
-The CSV files with "Comma" in their names will not be incorrectly identified when adding enemies. 
+00:00:31,000 --> 00:00:50,000
+The CSV files with comma in their names will not be incorrectly identified when adding enemies. Entering enemy's speed will prompt an error if it is not a number or an integer.
 
 4
-00:00:25,560 --> 00:00:33,800
-Entering enemy speed will prompt an error if it is not a number or an integer.
+00:00:50,000 --> 00:01:05,000
+The game will not be able to identify the player.
 
 5
-00:00:33,800 --> 00:00:41,360
-"Add" and "Edit" are added temporarily and are not written to the CSV file.
+00:01:05,000 --> 00:01:20,000
+The game will not be able to identify the player.
 
 6
-00:00:41,360 --> 00:00:50,040
-Click "Save" to write the file to the CSV file, then "Delete" is delete.
+00:01:20,000 --> 00:01:35,000
+The game will not be able to identify the player.
 
 7
-00:00:50,040 --> 00:00:58,680
-This save is the standard for outstanding data persistence. Finish the program by clicking "Save",
+00:01:35,000 --> 00:02:02,000
+And add an edit or edit temporarily and are not written to the CSV file.
 
 8
-00:00:58,680 --> 00:01:06,720
-open enemies.csv, show the enemies you just added called "Comma" and "Double Quotes",
+00:02:02,000 --> 00:02:13,000
+Click "Save" to write the file to the CSV file. Then "Delete" is "Delete".
 
 9
-00:01:06,720 --> 00:01:16,640
-then start again and see that their names are displayed correctly.
+00:02:13,000 --> 00:02:21,000
+This save is the standard for outstanding data persistence.
 
 10
-00:01:16,640 --> 00:01:25,200
-For enemy names, the speed map implement the CRUD function with a graphical interface, then click "Start",
+00:02:21,000 --> 00:02:38,000
+Finish the program by clicking "Save" and open the "Enemies.csv" to show the enemies you just added called commas and double quotes.
 
 11
-00:01:25,200 --> 00:01:31,040
-enter "Double Quotes" and "Comma" in the name to prove the robustness of the code,
+00:02:38,000 --> 00:02:56,000
+These are double quotes and this is "a". And then start again to see that their names are displayed correctly.
 
 12
-00:01:31,040 --> 00:01:39,040
-then enter decimals and letters in the velocity, and then a window will pop up.
+00:02:56,000 --> 00:03:04,000
+For enemy names, Speed Maps implements CRUD function with a graphical interface.
 
 13
-00:01:39,040 --> 00:01:48,280
-After a few clicks on the drop-down box of the picture, selecting this enemy is selecting the corresponding tile.
+00:03:04,000 --> 00:03:16,000
+Then click "Start". Enter double quotes and commas in the name to prove the robustness of the code. Then enter decimals and letters in the velocity. A window will pop up.
 
 14
-00:01:48,280 --> 00:01:55,760
-Before clicking to start the game, enemies will randomly send new ones from the list of existing enemies.
+00:03:16,000 --> 00:03:30,000
+After a few clicks on the drop-down box of the picture.
 
 15
-00:01:55,760 --> 00:02:10,200
-Then what we have to do is manipulate the player to avoid the fireball, waterball, and magic ball. If the ball crosses the bottom line, it scores. 
+00:03:30,000 --> 00:03:42,000
+Selecting this enemy is selecting the corresponding tile. Before clicking to start the game, enemies will randomly send a new one from the list of existing enemies.
 
 16
-00:02:10,200 --> 00:02:20,480
-Every time you increase the difficulty level, you increase the speed of the enemy, and then this is our pause, continue, and restart function.
+00:03:42,000 --> 00:03:52,000
+Then what we have to do is manipulate the player to avoid the fireball, waterball, magic ball and so on.
 
+17
+00:03:52,000 --> 00:04:10,000
+Then we click "Start Game".
+
+18
+00:04:10,000 --> 00:04:26,000
+And then this is "Restart Game"
+
+19
+00:04:26,000 --> 00:04:42,000
+We can also pause the game.
+
+20
+00:04:42,000 --> 00:04:46,000
+And then continue.
+
+21
+00:04:46,000 --> 00:04:50,000
+Pause and continue.
+
+22
+00:04:50,000 --> 00:05:06,000
+If we meet the enemy, the game is over and we can see the score on the screen.
+
+23
+00:05:06,000 --> 00:05:24,000
+If the ball crosses the bottom line, it scores. And for every 10 points, the difficulty level increases by 1 level and enemies become faster.
+
+24
+00:05:24,000 --> 00:05:52,000
+And then this is the whole game.

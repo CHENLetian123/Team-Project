@@ -40,7 +40,7 @@ public class Enemy {
 
     public void resetPosition() {    // Reset the enemy's position off the top of the screen / 重置敌人的位置到屏幕顶部之外
         y = -size; // 从屏幕顶部外开始
-        x = random.nextInt(800 - size); // random position / 随机位置
+        x = random.nextInt(1024 - size); // random position / 随机位置
         //speed = 2 + random.nextInt(3); // random speed / 随机速度
     }
 
